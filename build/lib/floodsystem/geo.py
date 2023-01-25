@@ -5,6 +5,5 @@
 geographical data.
 
 """
-from haversine import haversine
-from .utils import sorted_by_key  # noqa
 
+from .utils import sorted_by_key  # noqa
