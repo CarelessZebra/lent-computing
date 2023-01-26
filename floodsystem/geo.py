@@ -16,3 +16,20 @@ def stations_within_radius(stations, centre, r):
         if distance <= r:
             stations_in_radius.append(station)
     return stations_in_radius
+
+def rivers_with_station(stations):
+    """Builds and returns a set of unique rivers from a list of MonitoringStation objects"""
+    rivers = set()
+    for station in stations:
+        rivers.add(station.river)
+    return rivers
+
+def stations_by_river(stations):
+    """Returns a dictionary with rivers as keys and lists of stations as the values"""
+    d = dict()
+    for station in stations:
+        if station.river in d:
+            d[station.river].append(station)
+        else:
+            d[station.river] = [station,]
+    return d
