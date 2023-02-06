@@ -33,3 +33,19 @@ def stations_by_river(stations):
         else:
             d[station.river] = [station,]
     return d
+
+def stations_by_distance(stations, p):
+    D = {}
+    E = {}
+    L = []
+    for station in stations:
+        coord = station.coord
+        dist = haversine(coord, p)
+        L.append(dist)
+        D[dist] = station.name
+        E[dist] = station.town
+    L.sort()
+    T = []
+    for i in L:
+        T.append((D[i], E[i], i))
+    return T
