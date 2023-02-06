@@ -58,3 +58,23 @@ def stations_by_distance(stations, p):
     for i in L:
         T.append((D[i], E[i], i))
     return T
+
+def rivers_by_station_number(stations, N):
+    D = {}
+    for station in stations:
+        if station.river in D.keys():
+            D[station.river] += 1
+        else:
+            D[station.river] = 0
+    name = []
+    num = []
+    L = []
+    for i in D.keys():
+        name.append(i)
+        num.append(D[i])
+    for i in range(1, max(num) + 1):
+        for j in range(len(num)):
+            if num[j] == i:
+                L.append((num[j], name[j]))
+    L.reverse()
+    return((L[:N]))
