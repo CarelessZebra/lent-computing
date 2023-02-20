@@ -77,4 +77,12 @@ def rivers_by_station_number(stations, N):
             if num[j] == i:
                 L.append((num[j], name[j]))
     L.reverse()
-    return((L[:N]))
+    K =[]
+    n = 0
+    for i in range(len(L)):
+        if n < N-1:
+            K.append(L[n])
+            n += 1
+        elif L[n][0] == L[i][0]:
+            K.append(L[i])
+    return((K))

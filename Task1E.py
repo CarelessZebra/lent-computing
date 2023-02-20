@@ -9,9 +9,9 @@ def run():
     stations = build_station_list()
 
     # Find sorted rivers
-    sorted_list = rivers_by_station_number(stations, 9)
-
-    # Display first 9 rivers
+    sorted_list = rivers_by_station_number(stations, 5)
+    print(sorted_list)
+    sorted_list = rivers_by_station_number(stations, 10)
     print(sorted_list)
 
 if __name__ == "__main__":
