@@ -18,3 +18,23 @@ def stations_level_over_threshold(stations, tol):
                 stations_levels_over_threshold = sorted_by_key(stations_levels_over_threshold, 1, True)
     return stations_levels_over_threshold
 
+def stations_highest_rel_level(stations, N):
+    """Returns list of N stations sorted in descending order by relative level"""
+    #get list of all the stations sorted by relative water level descending
+    stations_levels = stations_level_over_threshold(stations, -100000)
+    station_list = []
+    count = 0
+    for station, level in stations_levels:
+        #add station to station list
+        station_list.append(station)
+        count += 1
+        #when N stations have been added to the list return the list
+        if count >= N:
+            return station_list
+        
+    #should probably have a separate return for if N is greater
+    #than the number of stations but python lets me get away with this.
+
+
+
+    
