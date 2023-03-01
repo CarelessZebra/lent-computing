@@ -64,3 +64,27 @@ def test_inconsistent_typical_range_stations():
     assert(len(inc_list)>=0)
     #make sure the number of inconsistent stations is less than the number of stations
     assert(len(inc_list)<=len(stations))
+
+def test_relative_water_level():
+    """Test the function relative_water_level from the MonitoringStation Class in station.py"""
+    #create station
+    s_id = "test-s-id"
+    m_id = "test-m-id"
+    label = "some station"
+    coord = (-2.0, 4.0)
+    trange = (-1, 1)
+    river = "River X"
+    town = "My Town"
+    s = MonitoringStation(s_id, m_id, label, coord, trange, river, town)
+    #testing for different typical range and latest level combinations
+    s.latest_level = 0
+    assert(s.relative_water_level() == 0.5)
+
+    s.typical_range = (0, 1)
+    s.latest_level = 0
+    assert(s.relative_water_level() == 0)
+
+    s.typical_range = (1, 5)
+    s.latest_level = 0
+    assert(s.relative_water_level() == -0.25)
+
