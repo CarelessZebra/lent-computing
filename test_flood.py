@@ -1,5 +1,5 @@
 """unit test for flood module"""
-from floodsystem.flood import stations_level_over_threshold
+from floodsystem.flood import stations_level_over_threshold, stations_highest_rel_level
 from floodsystem.station import MonitoringStation
 from floodsystem.stationdata import update_water_levels, build_station_list
 
@@ -26,3 +26,27 @@ def test_stations_level_over_threshold():
     #assert that the relative water level for all the stations in the returned list is greater than the specified tolerance of 0.5
     for x in stations_level_over_threshold(stations, 0.5):
         assert(x[1]>=0.5)
+
+def test_stations_highest_rel_level():
+    """Test stations_highest_rel_level function"""
+    #build a station list with different water levels, same list as above
+    s1 = MonitoringStation("s1", "m1", "l1", (0,0), (0,1), "river", "town")
+    s1.latest_level = -1
+    s2 = MonitoringStation("s2", "m2", "l2", (0,0), (0,1), "river", "town")
+    s2.latest_level = 0.5
+    s3 = MonitoringStation("s3", "m3", "l3", (0,0), (0,1), "river", "town")
+    s3.latest_level = 1.78
+    s4 = MonitoringStation("s4", "m4", "l4", (0,0), (0,1), "river", "town")
+    s4.latest_level = 0.600001
+    stations = [s1, s2, s3, s4]
+    #assert the stations_highest_rel_level returns the correct list of stations for different values of N
+    assert(stations_highest_rel_level(stations, 2)==[s3,s4])
+    assert(stations_highest_rel_level(stations, 3)==[s3, s4, s2])
+
+    #build list of the live data stations
+    stations = build_station_list()
+    #update water levels
+    update_water_levels(stations)
+    #check correct length list is returned for different values of N
+    for N in range(10):
+        assert(len(stations_highest_rel_level(stations, N))==N)

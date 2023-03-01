@@ -25,12 +25,13 @@ def stations_highest_rel_level(stations, N):
     station_list = []
     count = 0
     for station, level in stations_levels:
-        #add station to station list
-        station_list.append(station)
-        count += 1
         #when N stations have been added to the list return the list
         if count >= N:
             return station_list
+        #add station to station list
+        station_list.append(station)
+        count += 1
+        
         
     #should probably have a separate return for if N is greater
     #than the number of stations but python lets me get away with this.
