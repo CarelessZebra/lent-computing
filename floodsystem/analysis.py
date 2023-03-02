@@ -22,11 +22,10 @@ def most_at_risk(stations):
         p_coeff = np.polyfit(dates-d0, levels, 4)
         poly = np.poly1d(p_coeff)
         x1 = np.linspace(dates[0], dates[-1], 100)
-        diff = poly(x1-station.typical_range[1])
+        diff = poly(x1-d0) - station.typical_range[1]
         sum = np.sum(diff)
         if sum > max:
             ans = station.name
             max = sum
         print(max, ans, sum, station.name)
-        print(ans)
-    print(ans)
+    print("Most at risk of flooding:", ans)
